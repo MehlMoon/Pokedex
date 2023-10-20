@@ -9,15 +9,16 @@ export class Visualizer extends LitElement{
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        gap: 10px;
     }
 
     .card_pokemon{
-        margin-top: 20px;
         background-color: white;
-        width: 15%;
+        border: 2px solid black;
+        margin-top: 10px;
         height: 500px;
-        border: 1px solid black;
-
+        min-width: 300px;
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -29,17 +30,18 @@ export class Visualizer extends LitElement{
         color: white;
         text-align: center;
         width: 100%;
-        margin-bottom: 10px;
+        height: 35px;
+        line-height: 0px;
     }
 
     .pokemon_img{
-        background-color: rgba(128, 128, 128, 0.2);
+        background-color: rgba(128, 128, 128, 0.1);
+        margin-top: 8px;
         border-radius: 100px;
     }
 
     img {
         max-width: 100%;
-        
         display: block;
         }
 
@@ -47,8 +49,32 @@ export class Visualizer extends LitElement{
         text-align: justify;
         font-size: small;
         width: 80%;
-        height: 30%;
+        line-height: 15px;
     }
+    
+    .pokemon_minicontainer{
+        margin-top: 5px;
+        width:100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+    }
+
+    .poke_try{
+        border: 2px solid gray;
+        border-radius: 20px;
+        width: 40%;
+        line-height: 5px;
+    }
+
+    .poke_try2{
+        background-color: lightgray;
+        border-radius: 20px;
+        width: 40%;
+        line-height: 5px;
+    }
+
 
   };`
 
@@ -72,6 +98,27 @@ export class Visualizer extends LitElement{
                 <div class="pokemon_about">
                     <p>${info.about}</p>
                 </div>
+
+                <div class="pokemon_minicontainer">
+                    <div class="poke_try">
+                        <p>Height:</p>
+                        <p>${info.size.height}</p>
+                    </div>
+                    <div class="poke_try">
+                        <p>Weight:</p>
+                        <p>${info.size.weight}</p>
+                    </div>
+                </div>
+
+                <div class="pokemon_minicontainer">
+                    <div class="poke_try2">
+                        <p>${info.type[0]}</p>
+                    </div>
+                    <div class="poke_try2">
+                        <p>${info.type[1]}</p>
+                    </div>
+                </div>
+                
             </div>
                 `)}
         </div>`;
