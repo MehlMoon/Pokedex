@@ -74,7 +74,9 @@ export class Visualizer extends LitElement{
         width: 40%;
         line-height: 5px;
     }
-
+    .hidden{
+        display: none;
+    }
 
   };`
 
@@ -114,7 +116,7 @@ export class Visualizer extends LitElement{
                     <div class="poke_try2">
                         <p>${info.type[0]}</p>
                     </div>
-                    <div class="poke_try2">
+                    <div class="poke_try2 ${info.type[1] ? '' : 'hidden'}">
                         <p>${info.type[1]}</p>
                     </div>
                 </div>
