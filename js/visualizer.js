@@ -16,8 +16,9 @@ export class Visualizer extends LitElement{
         background-color: white;
         border: 2px solid black;
         margin-top: 10px;
-        height: 500px;
+        height: 510px;
         min-width: 300px;
+        max-width: 300px;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -61,23 +62,95 @@ export class Visualizer extends LitElement{
         justify-content: space-evenly;
     }
 
-    .poke_try{
+    .poke_line{
+        background-color: rgba(128, 128, 128, 0.2);
+        margin-top: 7px;
+        margin-bottom: 0px;
+        width: 100%;
+        height: 25px;
+    }
+
+    .pokemon_try{
         border: 2px solid gray;
         border-radius: 20px;
         width: 40%;
         line-height: 5px;
     }
 
-    .poke_try2{
+    .pokemon_try2{
         background-color: lightgray;
         border-radius: 20px;
         width: 40%;
         line-height: 5px;
     }
+
     .hidden{
         display: none;
     }
 
+    .bug{
+        background-color: rgb(177, 238, 89);
+        color: white;
+    }
+    .dark{
+        background-color: rgb(68, 58, 81);
+        color: white;
+    }
+    .dragon{
+        background-color: rgb(77, 114, 120);
+        color: white;
+    }
+    .electric{
+        background-color: rgb(232, 238, 16);
+        color: white;
+    }
+    .fairy{
+        background-color: rgb(255, 157, 197);
+    }
+    .fighting{
+        background-color: rgb(196, 40, 0);
+        color: white;
+    }
+    .fire{
+        background-color: rgb(246, 8, 8);
+        color: white;
+    }
+    .flying{
+        background-color: rgb(204, 227, 226);
+    }
+    .ghost{
+        background-color: rgb(87, 102, 139);
+        color: white;
+    }
+    .grass{
+        background-color: rgb(70, 191, 34);
+        color: white;
+    }
+    .ground{
+        background-color: rgb(193, 141, 14);
+        color: white;
+    }
+    .ice{
+        background-color: rgb(207, 246, 255);
+    }
+    .poison{
+        background-color: rgb(145, 17, 201);
+        color: white;
+    }
+    .psychic{
+        background-color: rgb(229, 200, 246);
+    }
+    .rock{
+       background-color: rgb(142, 62, 0);
+       color: white;
+    }
+    .steel{
+        background-color: rgb(132, 165, 175);
+    }
+    .water{
+        background-color: rgb(33, 122, 240);
+        color: white;
+    }
   };`
 
     constructor(){
@@ -87,43 +160,93 @@ export class Visualizer extends LitElement{
     render(){
         return html`
         <div class="container_pokemon">
-                ${pokemon.map(info => html`
+                ${pokemon.map(data => html`
                 <div class="card_pokemon">
                 <div class="pokemon_header">
-                    <h3>${info.name.toUpperCase()}</h3>
+                    <h3>${data.name.toUpperCase()}</h3>
                 </div>
 
                 <div class="pokemon_img">
-                    <img src=${info.img}/>
+                    <img src=${data.img}/>
                 </div>
 
                 <div class="pokemon_about">
-                    <p>${info.about}</p>
+                    <p>${data.about}</p>
+                </div>
+
+                <h5>${data.pokemonRarity.toUpperCase()}</h5>
+
+                <div class="poke_line">
+                    SIZE
                 </div>
 
                 <div class="pokemon_minicontainer">
-                    <div class="poke_try">
+                    <div class="pokemon_try">
                         <p>Height:</p>
-                        <p>${info.size.height}</p>
+                        <p>${data.size.height}</p>
                     </div>
-                    <div class="poke_try">
+                    <div class="pokemon_try">
                         <p>Weight:</p>
-                        <p>${info.size.weight}</p>
+                        <p>${data.size.weight}</p>
                     </div>
                 </div>
 
+                <div class="poke_line">
+                    TYPE
+                </div>
+
                 <div class="pokemon_minicontainer">
-                    <div class="poke_try2">
-                        <p>${info.type[0]}</p>
+                    <div class="pokemon_try2 ${differentColor(data.type[0])}">
+                        <p>${data.type[0]}</p>
                     </div>
-                    <div class="poke_try2 ${info.type[1] ? '' : 'hidden'}">
-                        <p>${info.type[1]}</p>
+                    <div class="pokemon_try2 ${data.type[1] ? differentColor(data.type[1]) : 'hidden'}">
+                        <p>${data.type[1]}</p>
                     </div>
                 </div>
-                
             </div>
                 `)}
         </div>`;
+
+        function differentColor(type){
+            switch (type){
+                case "bug":
+                    return "bug";
+                case "dark":
+                    return "dark";
+                case "dragon":
+                    return "dragon";
+                case "electric":
+                    return "electric";
+                case "fairy":
+                    return "fairy";
+                case "fighting":
+                    return "fighting";
+                case "fire":
+                    return "fire";
+                case "flying":
+                    return "flying";
+                case "ghost":
+                    return "ghost";
+                case "grass":
+                    return "grass";
+                case "ground":
+                    return "ground";
+                case "ice":
+                    return "ice";
+                case "poison":
+                    return "poison";
+                case "psychic":
+                    return "psychic";
+                case "rock":
+                    return "rock";
+                case "steel":
+                    return "steel";
+                case "water":
+                    return "water";
+                default:
+                    return "";
+            }
+        }
     }
 }
 customElements.define("painting-cards", Visualizer);
