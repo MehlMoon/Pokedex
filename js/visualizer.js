@@ -199,9 +199,8 @@ export class Visualizer extends LitElement{
                     <div class="pokemon_try2 ${differentColor(data.type[0])}">
                         <p>${data.type[0]}</p>
                     </div>
-                    <div class="pokemon_try2 ${data.type[1] ? differentColor(data.type[1]) : 'hidden'}">
-                        <p>${data.type[1]}</p>
-                    </div>
+                    <div class="pokemon_try2 ${secondType(data.type[1])}">
+                    <p>${data.type[1]}</p>
                 </div>
             </div>
                 `)}
@@ -245,6 +244,15 @@ export class Visualizer extends LitElement{
                     return "water";
                 default:
                     return "";
+            }
+        }
+
+        function secondType(type){
+            if (type){
+                return differentColor(type);
+            }
+            else {
+                return "hidden";
             }
         }
     }
