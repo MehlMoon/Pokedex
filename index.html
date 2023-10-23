@@ -16,8 +16,8 @@
 
     <div class="main_container">
         <div class="navigation">
-            <select name="type" id="">
-                <option value="default">Seleccionar </option>
+            <select id="typeSelector">
+                <option value="default">All</option>
                 <option value="bug">Bug</option>
                 <option value="dark">Dark</option>
                 <option value="dragon">Dragon</option>
@@ -34,14 +34,14 @@
                 <option value="poison">Poison</option>
                 <option value="psychic">Psychic</option>
                 <option value="rock">Rock</option>
-                <option value="steek">Steel</option>
+                <option value="steel">Steel</option>
                 <option value="water">Water</option>
             </select>
-            <input type="text" value="" placeholder="Buscar por nombre" />
+            <input id="buscador" type="text" value="" placeholder="Buscar por nombre" />
         </div>
 
         <div class="component">
-            <painting-cards></painting-cards>
+            <my-app></my-app>
         </div>
 
         <div class="footer">

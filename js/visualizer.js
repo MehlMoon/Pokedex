@@ -2,14 +2,12 @@ import { LitElement, html, css } from "lit";
 import { pokemon } from "./pokemon";
 
 export class Visualizer extends LitElement{
-
     static styles = css`
     .container_pokemon{
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: space-evenly;
-        gap: 10px;
     }
 
     .card_pokemon{
@@ -151,7 +149,7 @@ export class Visualizer extends LitElement{
         background-color: rgb(33, 122, 240);
         color: white;
     }
-  };`
+    };`
 
     constructor(){
         super();
@@ -188,6 +186,7 @@ export class Visualizer extends LitElement{
                     <div class="pokemon_try">
                         <p>Weight:</p>
                         <p>${data.size.weight}</p>
+                        
                     </div>
                 </div>
 
@@ -207,7 +206,7 @@ export class Visualizer extends LitElement{
         </div>`;
 
         function differentColor(type){
-            switch (type){
+            switch (type){ //Lee el "type" y regresa una clase según el "type"
                 case "bug":
                     return "bug";
                 case "dark":
@@ -243,12 +242,12 @@ export class Visualizer extends LitElement{
                 case "water":
                     return "water";
                 default:
-                    return "";
+                    return ""; //Aplica para el tipo Normal
             }
         }
 
         function secondType(type){
-            if (type){
+            if (type){ //Analiza "type" y si existe, la pinta; si no, si es undefined o null lo oculta
                 return differentColor(type);
             }
             else {
