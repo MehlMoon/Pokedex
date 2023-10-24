@@ -12,7 +12,7 @@ export class Visualizer extends LitElement{
         let oldValue = this.pokemon;
         if (oldValue !== value){
             this._pokemon = value;
-            this.requestUpdate("pokemon", oldValue)
+            this.requestUpdate("pokemon", oldValue);
         }
     }
 
@@ -32,7 +32,7 @@ export class Visualizer extends LitElement{
         background-color: white;
         border: 2px solid black;
         margin-top: 10px;
-        height: 410px;
+        height: 400px;
         min-width: 300px;
         max-width: 300px;
         flex: 1;
@@ -46,6 +46,7 @@ export class Visualizer extends LitElement{
 
     .card_pokemon:hover{
         height: 510px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
 
     .pokemon_header{
@@ -177,7 +178,6 @@ export class Visualizer extends LitElement{
 
     constructor(){
         super();
-        
     }
 
     render(){
@@ -194,27 +194,27 @@ export class Visualizer extends LitElement{
                         <img src=${data.img}/>
                     </div>
 
-                    <h5>${data.pokemonRarity.toUpperCase()}</h5>
+                    <p>${data.pokemonRarity.toUpperCase()}</p>
 
                     <div class="poke_line">
                         SIZE
                     </div>
 
                     <div class="pokemon_minicontainer">
-                        <div class="pokemon_try">
-                            <p>Height:</p>
-                            <p>${data.size.height}</p>
-                        </div>
-                        <div class="pokemon_try">
-                            <p>Weight:</p>
-                            <p>${data.size.weight}</p>
-                        </div>
+                    <div class="pokemon_try">
+                        <p>Height:</p>
+                        <p>${data.size.height}</p>
+                    </div>
+                    <div class="pokemon_try">
+                        <p>Weight:</p>
+                        <p>${data.size.weight}</p>
+                    </div>
                     </div>
 
                     <div class="poke_line">
                         TYPE
                     </div>
-
+                    
                     <div class="pokemon_minicontainer">
                         <div class="pokemon_try2 ${differentColor(data.type[0])}">
                             <p>${data.type[0]}</p>
@@ -223,6 +223,9 @@ export class Visualizer extends LitElement{
                         <p>${data.type[1]}</p>
                         </div>
                     </div>
+                    
+
+                
 
                     <div class="pokemon_about">
                         <p>${data.about}</p>
@@ -282,7 +285,7 @@ export class Visualizer extends LitElement{
     }
 
     updated(changedProperties){
-        if (changedProperties.has("filteredPokemon")){
+        if (changedProperties.has("filteredPokemon") || changedProperties.has("searchedName")){
             this.requestUpdate();
         }
     }

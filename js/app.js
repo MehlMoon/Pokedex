@@ -36,19 +36,26 @@ export class App extends LitElement{
     `;
     static properties = {
         filteredPokemon: { type: Array },
-        selectedType: { type: String }
+        selectedType: { type: String },
+        searchedName: { type: String }
     }
 
     constructor(){
         super();
         this.filteredPokemon = pokemon;
         this.selectedType = "default"; //Default para que muestre todos
+        this.searchedName = "";
     }
 
     typeChange(event){
         this.selectedType = event.target.value;
         this.typeSelector();
         console.log("Tipo seleccionado: " + event.target.value)
+    }
+
+    nameSearch(event){
+        this.searchedName = event.target.value;
+        console.log("Buscando: " + event.target.value);
     }
 
     typeSelector(){
@@ -62,6 +69,11 @@ export class App extends LitElement{
             });
         }
         console.log(this.filteredPokemon);
+    }
+
+    nameSearcher(){
+        const searched = this.searchedName;
+        
     }
 
     render(){
@@ -88,7 +100,7 @@ export class App extends LitElement{
                 <option value="steel">Steel</option>
                 <option value="water">Water</option>
             </select>
-            <input id="buscador" type="text" @input="" placeholder="Search by Name" />
+            <input id="buscador" type="text" @input="${this.nameSearch}" placeholder="Search by Name" />
         </div>
 
         <painting-cards .pokemon="${this.filteredPokemon}"></painting-cards>
