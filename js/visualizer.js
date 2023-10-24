@@ -32,7 +32,7 @@ export class Visualizer extends LitElement{
         background-color: white;
         border: 2px solid black;
         margin-top: 10px;
-        height: 400px;
+        height: 395px;
         min-width: 300px;
         max-width: 300px;
         flex: 1;
@@ -45,8 +45,7 @@ export class Visualizer extends LitElement{
     }
 
     .card_pokemon:hover{
-        height: 510px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        height: auto;
     }
 
     .pokemon_header{
@@ -220,15 +219,24 @@ export class Visualizer extends LitElement{
                             <p>${data.type[0]}</p>
                         </div>
                         <div class="pokemon_try2 ${secondType(data.type[1])}">
-                        <p>${data.type[1]}</p>
+                            <p>${data.type[1]}</p>
                         </div>
                     </div>
-                    
 
-                
+                    <div class="poke_line">
+                        ABOUT
+                    </div>
 
                     <div class="pokemon_about">
                         <p>${data.about}</p>
+                    </div>
+
+                    <div class="poke_line">
+                        GENERATION
+                    </div>
+
+                    <div class="pokemon_minicontainer">
+                        <p>${data.generation.name.toUpperCase()}</p>
                     </div>
                 `})}
         </div>`;

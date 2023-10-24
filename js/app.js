@@ -21,7 +21,7 @@ export class App extends LitElement{
     select{
         background-color: darkgray;
         color: white;
-        width: 20%;
+        width: 25%;
         height: 50%;
         text-align: center;
     }
@@ -29,7 +29,7 @@ export class App extends LitElement{
     input{
         background-color: white;
         color: black;
-        width: 70%;
+        width: 40%;
         height: 50%;
         text-align: left;
     }
@@ -47,14 +47,17 @@ export class App extends LitElement{
         this.searchedName = "";
     }
 
-    typeChange(event){
+    dataChange(event){
         this.selectedType = event.target.value;
         this.typeSelector();
-        console.log("Tipo seleccionado: " + event.target.value)
+        this.nameSearcher();
+        console.log("Tipo seleccionado: " + event.target.value);
+        console.log()
     }
 
     nameSearch(event){
         this.searchedName = event.target.value;
+        this.nameSearcher();
         console.log("Buscando: " + event.target.value);
     }
 
@@ -69,18 +72,22 @@ export class App extends LitElement{
             });
         }
         console.log(this.filteredPokemon);
+        return this.filteredPokemon && this.searchedName;
     }
 
-    nameSearcher(){
-        const searched = this.searchedName;
-        
+    nameSearcher(){ 
+        this.filteredPokemon = pokemon.filter(p => {
+            const typejoin = this.selectedType === "default" || (p.type[0] === this.selectedType || (p.type[1] && p.type[1] === this.selectedType));
+            const namejoin = p.name.includes(this.searchedName);
+            return  typejoin && namejoin;
+        });
     }
 
     render(){
         return html`
         <div class="navigation">
-            <select id="typeSelector" @change="${this.typeChange}">
-                <option value="default">All</option>
+            <select id="type" @change="${this.dataChange}">
+                <option value="default">All Types</option>
                 <option value="bug">Bug</option>
                 <option value="dark">Dark</option>
                 <option value="dragon">Dragon</option>
@@ -100,6 +107,13 @@ export class App extends LitElement{
                 <option value="steel">Steel</option>
                 <option value="water">Water</option>
             </select>
+
+            <select id="generation" @change="${this.geneChange}">
+                <option value="default">Generation</option>
+                <option value="1">Kanto</option>
+                <option value="2">Johto</option>
+            </select>
+
             <input id="buscador" type="text" @input="${this.nameSearch}" placeholder="Search by Name" />
         </div>
 
