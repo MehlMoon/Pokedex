@@ -2,6 +2,24 @@ import { LitElement, html, css } from "lit";
 import { pokemon } from "./pokemon";
 
 export class Visualizer extends LitElement{
+    static get properties(){
+        return {
+            pokemon: { type: Array}
+        }
+    }
+
+    set pokemon(value){
+        let oldValue = this.pokemon;
+        if (oldValue !== value){
+            this._pokemon = value;
+            this.requestUpdate("pokemon", oldValue)
+        }
+    }
+
+    get pokemon(){
+        return this._pokemon
+    }
+
     static styles = css`
     .container_pokemon{
         display: flex;
@@ -14,7 +32,7 @@ export class Visualizer extends LitElement{
         background-color: white;
         border: 2px solid black;
         margin-top: 10px;
-        height: 510px;
+        height: 410px;
         min-width: 300px;
         max-width: 300px;
         flex: 1;
@@ -153,56 +171,53 @@ export class Visualizer extends LitElement{
 
     constructor(){
         super();
+        
     }
 
     render(){
         return html`
         <div class="container_pokemon">
-                ${pokemon.map(data => html`
+                ${pokemon.map(data => {
+                return html`
                 <div class="card_pokemon">
-                <div class="pokemon_header">
-                    <h3>${data.name.toUpperCase()}</h3>
-                </div>
-
-                <div class="pokemon_img">
-                    <img src=${data.img}/>
-                </div>
-
-                <div class="pokemon_about">
-                    <p>${data.about}</p>
-                </div>
-
-                <h5>${data.pokemonRarity.toUpperCase()}</h5>
-
-                <div class="poke_line">
-                    SIZE
-                </div>
-
-                <div class="pokemon_minicontainer">
-                    <div class="pokemon_try">
-                        <p>Height:</p>
-                        <p>${data.size.height}</p>
+                    <div class="pokemon_header">
+                        <h3>${data.name.toUpperCase()}</h3>
                     </div>
-                    <div class="pokemon_try">
-                        <p>Weight:</p>
-                        <p>${data.size.weight}</p>
-                        
-                    </div>
-                </div>
 
-                <div class="poke_line">
-                    TYPE
-                </div>
-
-                <div class="pokemon_minicontainer">
-                    <div class="pokemon_try2 ${differentColor(data.type[0])}">
-                        <p>${data.type[0]}</p>
+                    <div class="pokemon_img">
+                        <img src=${data.img}/>
                     </div>
-                    <div class="pokemon_try2 ${secondType(data.type[1])}">
-                    <p>${data.type[1]}</p>
-                </div>
-            </div>
-                `)}
+
+                    <h5>${data.pokemonRarity.toUpperCase()}</h5>
+
+                    <div class="poke_line">
+                        SIZE
+                    </div>
+
+                    <div class="pokemon_minicontainer">
+                        <div class="pokemon_try">
+                            <p>Height:</p>
+                            <p>${data.size.height}</p>
+                        </div>
+                        <div class="pokemon_try">
+                            <p>Weight:</p>
+                            <p>${data.size.weight}</p>
+                        </div>
+                    </div>
+
+                    <div class="poke_line">
+                        TYPE
+                    </div>
+
+                    <div class="pokemon_minicontainer">
+                        <div class="pokemon_try2 ${differentColor(data.type[0])}">
+                            <p>${data.type[0]}</p>
+                        </div>
+                        <div class="pokemon_try2 ${secondType(data.type[1])}">
+                        <p>${data.type[1]}</p>
+                        </div>
+                    </div>
+                `})}
         </div>`;
 
         function differentColor(type){
@@ -253,6 +268,11 @@ export class Visualizer extends LitElement{
             else {
                 return "hidden";
             }
+        }
+    }
+
+    updated(changedProperties){
+        if (changedProperties.has("pokemon")){
         }
     }
 }
