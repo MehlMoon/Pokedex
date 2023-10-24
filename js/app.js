@@ -42,13 +42,12 @@ export class App extends LitElement{
     constructor(){
         super();
         this.filteredPokemon = pokemon;
-        this.selectedType = "default";
+        this.selectedType = "default"; //Default para que muestre todos
     }
 
-    handleTypeChange(event){
+    typeChange(event){
         this.selectedType = event.target.value;
         this.typeSelector();
-        console.log("Si está cambiando a " + this.selectedType);
         console.log("Tipo seleccionado: " + event.target.value)
     }
 
@@ -62,13 +61,13 @@ export class App extends LitElement{
                 );
             });
         }
-        console.log(this.filteredPokemon)
+        console.log(this.filteredPokemon);
     }
 
     render(){
         return html`
         <div class="navigation">
-            <select id="typeSelector" @change="${this.handleTypeChange}">
+            <select id="typeSelector" @change="${this.typeChange}">
                 <option value="default">All</option>
                 <option value="bug">Bug</option>
                 <option value="dark">Dark</option>
@@ -89,9 +88,9 @@ export class App extends LitElement{
                 <option value="steel">Steel</option>
                 <option value="water">Water</option>
             </select>
-            <input id="buscador" type="text" value="" placeholder="Buscar por nombre" />
+            <input id="buscador" type="text" @input="" placeholder="Search by Name" />
         </div>
-        
+
         <painting-cards .pokemon="${this.filteredPokemon}"></painting-cards>
         `;
     } 

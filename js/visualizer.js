@@ -40,6 +40,12 @@ export class Visualizer extends LitElement{
         flex-direction: column;
         align-items: center;
         text-align: center;
+        transition: height 1s;
+        overflow: hidden;
+    }
+
+    .card_pokemon:hover{
+        height: 510px;
     }
 
     .pokemon_header{
@@ -105,7 +111,7 @@ export class Visualizer extends LitElement{
     }
 
     .bug{
-        background-color: rgb(177, 238, 89);
+        background-color: rgb(83,204,14);
         color: white;
     }
     .dark{
@@ -117,7 +123,7 @@ export class Visualizer extends LitElement{
         color: white;
     }
     .electric{
-        background-color: rgb(232, 238, 16);
+        background-color: rgb(255,216,57);
         color: white;
     }
     .fairy{
@@ -139,7 +145,7 @@ export class Visualizer extends LitElement{
         color: white;
     }
     .grass{
-        background-color: rgb(70, 191, 34);
+        background-color: rgb(23,145,21);
         color: white;
     }
     .ground{
@@ -216,6 +222,10 @@ export class Visualizer extends LitElement{
                         <div class="pokemon_try2 ${secondType(data.type[1])}">
                         <p>${data.type[1]}</p>
                         </div>
+                    </div>
+
+                    <div class="pokemon_about">
+                        <p>${data.about}</p>
                     </div>
                 `})}
         </div>`;
