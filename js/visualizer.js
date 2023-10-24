@@ -177,7 +177,7 @@ export class Visualizer extends LitElement{
     render(){
         return html`
         <div class="container_pokemon">
-                ${pokemon.map(data => {
+                ${this.pokemon.map(data => {
                 return html`
                 <div class="card_pokemon">
                     <div class="pokemon_header">
@@ -272,7 +272,8 @@ export class Visualizer extends LitElement{
     }
 
     updated(changedProperties){
-        if (changedProperties.has("pokemon")){
+        if (changedProperties.has("filteredPokemon")){
+            this.requestUpdate();
         }
     }
 }
