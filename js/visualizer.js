@@ -32,9 +32,9 @@ export class Visualizer extends LitElement{
         background-color: white;
         border: 2px solid black;
         margin-top: 10px;
-        height: 395px;
+        height: 385px;
         min-width: 300px;
-        max-width: 300px;
+        max-width: 250px;
         flex: 1;
         display: flex;
         flex-direction: column;
@@ -77,6 +77,7 @@ export class Visualizer extends LitElement{
     
     .pokemon_minicontainer{
         margin-top: 5px;
+        margin-bottom: 5px;
         width:100%;
         display: flex;
         flex-direction: row;
@@ -86,7 +87,6 @@ export class Visualizer extends LitElement{
 
     .poke_line{
         background-color: rgba(128, 128, 128, 0.2);
-        margin-top: 7px;
         margin-bottom: 0px;
         width: 100%;
         height: 25px;
@@ -101,6 +101,13 @@ export class Visualizer extends LitElement{
 
     .pokemon_try2{
         background-color: lightgray;
+        border-radius: 20px;
+        width: 40%;
+        line-height: 5px;
+    }
+
+    .pokemon_try3{
+        border: 2px dotted lightgray;
         border-radius: 20px;
         width: 40%;
         line-height: 5px;
@@ -224,6 +231,19 @@ export class Visualizer extends LitElement{
                     </div>
 
                     <div class="poke_line">
+                        MOVEMENTS
+                    </div>
+
+                    <div class="pokemon_minicontainer">
+                        <div class="pokemon_try3">
+                            <p>${data[`quick-move`][0].name}</p>
+                        </div>
+                        <div class="pokemon_try3">
+                            <p>${data[`special-attack`][0].name}</p>
+                        </div>
+                    </div>
+
+                    <div class="poke_line">
                         ABOUT
                     </div>
 
@@ -235,9 +255,7 @@ export class Visualizer extends LitElement{
                         GENERATION
                     </div>
 
-                    <div class="pokemon_minicontainer">
-                        <p>${data.generation.name.toUpperCase()}</p>
-                    </div>
+                    <p>${data.generation.name.toUpperCase()}</p>
                 `})}
         </div>`;
 
@@ -293,7 +311,7 @@ export class Visualizer extends LitElement{
     }
 
     updated(changedProperties){
-        if (changedProperties.has("filteredPokemon") || changedProperties.has("searchedName")){
+        if (changedProperties.has("newPokemon") || changedProperties.has("searchedName")){
             this.requestUpdate();
         }
     }

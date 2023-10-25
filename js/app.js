@@ -21,7 +21,7 @@ export class App extends LitElement{
     select{
         background-color: darkgray;
         color: white;
-        width: 25%;
+        width: 20%;
         height: 50%;
         text-align: center;
     }
@@ -29,54 +29,60 @@ export class App extends LitElement{
     input{
         background-color: white;
         color: black;
-        width: 40%;
+        width: 70%;
         height: 50%;
         text-align: left;
     }
+    img{
+        min-width: 25px;
+        max-width: 25px;
+        display: block;
+    }
     `;
+
     static properties = {
-        filteredPokemon: { type: Array },
+        newPokemon: { type: Array },
         selectedType: { type: String },
         searchedName: { type: String }
     }
 
     constructor(){
         super();
-        this.filteredPokemon = pokemon;
+        this.newPokemon = pokemon; //Almacenar los cambios en esta variable
         this.selectedType = "default"; //Default para que muestre todos
         this.searchedName = "";
     }
 
-    dataChange(event){
+    pokeSelect(event){
         this.selectedType = event.target.value;
-        this.typeSelector();
-        this.nameSearcher();
-        console.log("Tipo seleccionado: " + event.target.value);
-        console.log()
+        this.selector();
+        this.searcher();
+        console.log("Tipo seleccionado: " + event.target.value); //A ver si selecciona el tipo
     }
 
     nameSearch(event){
-        this.searchedName = event.target.value;
-        this.nameSearcher();
-        console.log("Buscando: " + event.target.value);
+        this.searchedName = event.target.value.toLowerCase();
+        this.searcher();
+        console.log("Buscando: " + event.target.value); //A ver si busca lo que quiero y ver si lo hace minúsculas
     }
 
-    typeSelector(){
+    selector(){
         if (this.selectedType === "default"){
-            this.filteredPokemon = pokemon;
+            this.newPokemon = pokemon;
         } else {
-            this.filteredPokemon = pokemon.filter(p => {
+            this.newPokemon = pokemon.filter(p => {
                 return (
                     p.type[0] === this.selectedType || (p.type[1] && p.type[1] === this.selectedType)
                 );
-            });
+            }); //Filtro por tipo considerando ambas partes del array
         }
-        console.log(this.filteredPokemon);
-        return this.filteredPokemon && this.searchedName;
+
+        console.log(this.newPokemon);
+        this.searcher();
     }
 
-    nameSearcher(){ 
-        this.filteredPokemon = pokemon.filter(p => {
+    searcher(){ 
+        this.newPokemon = pokemon.filter(p => {
             const typejoin = this.selectedType === "default" || (p.type[0] === this.selectedType || (p.type[1] && p.type[1] === this.selectedType));
             const namejoin = p.name.includes(this.searchedName);
             return  typejoin && namejoin;
@@ -86,7 +92,7 @@ export class App extends LitElement{
     render(){
         return html`
         <div class="navigation">
-            <select id="type" @change="${this.dataChange}">
+            <select id="type" @change="${this.pokeSelect}">
                 <option value="default">All Types</option>
                 <option value="bug">Bug</option>
                 <option value="dark">Dark</option>
@@ -107,17 +113,11 @@ export class App extends LitElement{
                 <option value="steel">Steel</option>
                 <option value="water">Water</option>
             </select>
-
-            <select id="generation" @change="${this.geneChange}">
-                <option value="default">Generation</option>
-                <option value="1">Kanto</option>
-                <option value="2">Johto</option>
-            </select>
-
+            <img src="/img/find.png"/>
             <input id="buscador" type="text" @input="${this.nameSearch}" placeholder="Search by Name" />
         </div>
 
-        <painting-cards .pokemon="${this.filteredPokemon}"></painting-cards>
+        <painting-cards .pokemon="${this.newPokemon}"></painting-cards>
         `;
     } 
 }
